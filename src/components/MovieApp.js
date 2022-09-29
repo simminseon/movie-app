@@ -1,53 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import MovieList from "./MovieList";
 
-const dummy = [
-  {
-    title: "The Last Train from Madrid",
-    year: 1999,
-    genres: ["Action", "Adventure", "Drama", "Romance", "War"],
-    summary:
-      "The story of seven people: their lives and love affairs in Madrid during the Civil War.",
-    url: "#none",
-    medium_cover_image:
-      "https://yts.mx/assets/images/movies/the_last_train_from_madrid_1937/medium-cover.jpg",
-  },
-  {
-    title: "The Last Train from Madrid",
-    year: 1999,
-    genres: ["Action", "Adventure", "Drama", "Romance", "War"],
-    summary:
-      "The story of seven people: their lives and love affairs in Madrid during the Civil War.",
-    url: "#none",
-    medium_cover_image:
-      "https://yts.mx/assets/images/movies/the_last_train_from_madrid_1937/medium-cover.jpg",
-  },
-  {
-    title: "The Last Train from Madrid",
-    year: 1999,
-    genres: ["Action", "Adventure", "Drama", "Romance", "War"],
-    summary:
-      "The story of seven people: their lives and love affairs in Madrid during the Civil War.",
-    url: "#none",
-    medium_cover_image:
-      "https://yts.mx/assets/images/movies/the_last_train_from_madrid_1937/medium-cover.jpg",
-  },
-  {
-    title: "The Last Train from Madrid",
-    year: 1999,
-    genres: ["Action", "Adventure", "Drama", "Romance", "War"],
-    summary:
-      "The story of seven people: their lives and love affairs in Madrid during the Civil War.",
-    url: "#none",
-    medium_cover_image:
-      "https://yts.mx/assets/images/movies/the_last_train_from_madrid_1937/medium-cover.jpg",
-  },
-];
-
 function MovieApp() {
+  const [movies, setMovies] = useState(null);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://yts.mx/api/v2/list_movies.json?sort_by:rating"
+        );
+        setMovies(response.data.data.movies);
+      } catch (e) {
+        console.log(e, "에러발생!!!!!!");
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  if (loading) {
+    return <div>로딩중</div>;
+  }
+
+  if (!movies) {
+    return null;
+  }
+  // console.log(movies);
   return (
     <>
-      <MovieList movies={dummy} />
+      <MovieList movies={movies} />
     </>
   );
 }

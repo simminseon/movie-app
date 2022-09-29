@@ -1,18 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-export const ListMovie = styled.ul`
-  padding: 40px;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-export const ItemMovie = styled.li`
-  width: 48%;
+export const ItemMovieDetail = styled.div`
+  overflow: hidden;
   background-color: white;
-  margin-bottom: 70px;
+  margin: 20px;
   font-weight: 300;
   padding: 20px;
   border-radius: 5px;
@@ -23,18 +14,10 @@ export const ItemMovie = styled.li`
   box-sizing: border-box;
 `;
 
-export const LinkMovie = styled(Link)`
-  display: grid;
-  grid-template-columns: minmax(150px, 1fr) 2fr;
-  grid-gap: 20px;
-  text-decoration: none;
-  color: inherit;
-`;
-export const ThumbMovie = styled.div`
-  position: relative;
-  top: -50px;
-  width: 150px;
-  height: 225px;
+export const ThumbMovieDetail = styled.div`
+  float: left;
+  width: 230px;
+  height: 345px;
   margin-right: 30px;
   box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
     0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
@@ -44,20 +27,24 @@ export const ThumbMovie = styled.div`
   }
 `;
 
-export const TitleMovie = styled.strong`
-  margin-bottom: 5px;
-  font-size: 24px;
-  color: #2c2c2c;
-  font-weight: 300;
+export const ContMovieDetail = styled.div`
+  overflow: hidden;
 `;
 
-export const YearMovie = styled.div`
+export const TitleDMovieDetail = styled.strong`
+  margin-bottom: 5px;
+  font-size: 30px;
+  color: #2c2c2c;
+  font-weight: bold;
+`;
+
+export const YearMovieDetail = styled.div`
   margin-right: 10px;
   font-size: 14px;
   font-weight: 300;
 `;
 
-export const GenresListMovie = styled.div`
+export const GenresListMovieDetail = styled.div`
   padding: 0;
   margin: 0;
   display: flex;
@@ -65,11 +52,11 @@ export const GenresListMovie = styled.div`
   margin: 5px 0px;
 `;
 
-export const GenresMovie = styled.span`
+export const GenresMovieDetail = styled.span`
   padding-right: 10px;
 `;
 
-export const SummeryMovie = styled.p`
+export const SummeryMovieDetail = styled.p`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
@@ -80,4 +67,15 @@ export const SummeryMovie = styled.p`
   margin: 0;
   margin: 5px 0px;
   line-height: 20px;
+`;
+
+export const ButtonMovieDetail = styled.button`
+  width: 200px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: pink;
+  border: 0;
+  color: #222;
+  border-radius: 20px;
+  cursor: pointer;
 `;
