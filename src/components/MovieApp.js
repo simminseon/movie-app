@@ -10,7 +10,7 @@ function MovieApp() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://yts.mx/api/v2/list_movies.json?sort_by:rating"
+          "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
         );
         setMovies(response.data.data.movies);
       } catch (e) {

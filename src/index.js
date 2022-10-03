@@ -8,7 +8,7 @@ import MovieApp from "./components/MovieApp";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Routes basename={process.env.PUBLIC_URL}>
+    <Routes>
       <Route path="/" element={<MovieApp />} />
       <Route path="/movie/:id" element={<MovieDetail />} />
     </Routes>
