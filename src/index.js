@@ -1,16 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MovieDetail from "./routes/MovieDetail";
-import MovieApp from "./components/MovieApp";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<MovieApp />} />
-      <Route path="/movie/:id" element={<MovieDetail />} />
-    </Routes>
-  </BrowserRouter>
-);
+root.render(<App />);

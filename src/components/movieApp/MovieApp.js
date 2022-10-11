@@ -5,6 +5,7 @@ import MovieList from "./MovieList";
 function MovieApp() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
