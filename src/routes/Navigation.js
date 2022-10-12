@@ -5,7 +5,7 @@ import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
 function Navigation() {
   return (
     <Navbar bg="dark" variant="dark" sticky="top">
-      <Container className="mt-">
+      <Container>
         <Navbar.Brand href="#">Movie App</Navbar.Brand>
         <Nav className="me-auto" style={{ maxHeight: "100px" }} navbarScroll>
           <Nav.Link as={Link} to="/" href="#home">
