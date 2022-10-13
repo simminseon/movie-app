@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieList from "./MovieList";
 import { Link, useParams } from "react-router-dom";
 import { Nav, Container, Form } from "react-bootstrap";
+import useFetch from "../../Hooks/useFetch";
 
 const categories = [
   {
@@ -24,39 +25,25 @@ const categories = [
 ];
 
 function MovieApp() {
-  const [movies, setMovies] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [active, setActive] = useState("default");
   const [value, setValue] = useState("");
-
   const params = useParams();
   const sort = params.sort;
   const query = sort === "movieApp" ? "date_added" : sort;
+  const [data, loading] = useFetch(
+    `https://yts-proxy.now.sh/list_movies.json?sort_by=${query}`
+  );
+
+  useEffect(() => {
+    if (data) {
+      setMovies(data.data.movies);
+    }
+  }, [data]);
 
   const onChangeHandle = useCallback((e) => {
     setValue(e.target.value);
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `https://yts-proxy.now.sh/list_movies.json?sort_by=${query}`
-        );
-
-        setMovies(response.data.data.movies);
-      } catch (e) {
-        console.log(e, "에러발생!!!!!!");
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [query, onChangeHandle]);
-
-  if (!movies) {
-    return null;
-  }
 
   const filterMovie = movies.filter((data) => {
     return data.title.toUpperCase().includes(value.toUpperCase());
