@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 import MovieList from "./MovieList";
 import { Link, useParams } from "react-router-dom";
 import { Nav, Container, Form } from "react-bootstrap";
@@ -45,7 +44,7 @@ function MovieApp() {
     setValue(e.target.value);
   }, []);
 
-  const filterMovie = movies.filter((data) => {
+  const filterMovies = movies.filter((data) => {
     return data.title.toUpperCase().includes(value.toUpperCase());
   });
 
@@ -84,10 +83,10 @@ function MovieApp() {
       </Container>
       {loading ? (
         <Container className="mt-5">로딩중</Container>
-      ) : filterMovie.length === 0 ? (
+      ) : filterMovies.length === 0 ? (
         <Container className="mt-5">검색결과 없음</Container>
       ) : (
-        <MovieList movies={filterMovie} />
+        <MovieList movies={filterMovies} />
       )}
     </>
   );
