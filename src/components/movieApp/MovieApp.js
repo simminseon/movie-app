@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import MovieList from "./MovieList";
-// import { useParams } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
-import { Nav, Container } from "react-bootstrap";
+import { Nav, Container, Form } from "react-bootstrap";
 
 const categories = [
   {
@@ -28,10 +27,15 @@ function MovieApp() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState("default");
+  const [value, setValue] = useState("");
 
   const params = useParams();
   const sort = params.sort;
   const query = sort === "movieApp" ? "date_added" : sort;
+
+  const onChangeHandle = useCallback((e) => {
+    setValue(e.target.value);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +44,7 @@ function MovieApp() {
         const response = await axios.get(
           `https://yts-proxy.now.sh/list_movies.json?sort_by=${query}`
         );
+
         setMovies(response.data.data.movies);
       } catch (e) {
         console.log(e, "에러발생!!!!!!");
@@ -47,14 +52,15 @@ function MovieApp() {
       setLoading(false);
     };
     fetchData();
-  }, [query]);
-  if (loading) {
-    return <Container className="mt-5">로딩중</Container>;
-  }
+  }, [query, onChangeHandle]);
 
   if (!movies) {
     return null;
   }
+
+  const filterMovie = movies.filter((data) => {
+    return data.title.toUpperCase().includes(value.toUpperCase());
+  });
 
   return (
     <>
@@ -77,7 +83,25 @@ function MovieApp() {
           ))}
         </Nav>
       </Container>
-      <MovieList movies={movies} />
+      <Container className="mt-5">
+        <Form className="d-flex">
+          <Form.Control
+            type="search"
+            placeholder="영화 제목 찾기"
+            className="me-2"
+            aria-label="Search"
+            value={value}
+            onChange={onChangeHandle}
+          />
+        </Form>
+      </Container>
+      {loading ? (
+        <Container className="mt-5">로딩중</Container>
+      ) : filterMovie.length === 0 ? (
+        <Container className="mt-5">검색결과 없음</Container>
+      ) : (
+        <MovieList movies={filterMovie} />
+      )}
     </>
   );
 }

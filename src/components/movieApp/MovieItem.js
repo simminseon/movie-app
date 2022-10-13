@@ -53,7 +53,7 @@ function MovieItem({ movie }) {
 
 const CardImgCustom = styled(Card.Img)`
   position: absolute;
-  top: -30px;
+  top: 0;
   width: 150px;
 `;
 

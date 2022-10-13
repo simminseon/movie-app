@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 function Navigation() {
   return (
@@ -15,15 +15,6 @@ function Navigation() {
             Movie
           </Nav.Link>
         </Nav>
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button variant="outline-success">Search</Button>
-        </Form>
       </Container>
     </Navbar>
   );
